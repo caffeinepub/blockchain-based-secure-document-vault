@@ -1,0 +1,107 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-document-upload-interface-with-file-picker-drag-and-drop-support-client-side-encryption-before-upload-and-upload-progress-indicator",
+      "featureTitle": "Create a document upload interface with file picker, drag-and-drop support, client-side encryption before upload, and upload progress indicator",
+      "files": [
+        "frontend/src/components/DocumentUpload.tsx",
+        "frontend/src/hooks/useEncryption.ts"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-document-vault-dashboard-displaying-a-list-of-user-s-documents-with-name-upload-date-file-size-and-action-buttons-for-download-and-delete",
+      "featureTitle": "Build a document vault dashboard displaying a list of user's documents with name, upload date, file size, and action buttons for download and delete",
+      "files": [
+        "frontend/src/components/DocumentItem.tsx",
+        "frontend/src/components/DocumentList.tsx",
+        "frontend/src/pages/VaultDashboard.tsx"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-client-side-file-encryption-and-decryption-using-web-crypto-api-with-a-user-specific-encryption-key-derived-from-their-internet-identity-principal",
+      "featureTitle": "Implement client-side file encryption and decryption using Web Crypto API with a user-specific encryption key derived from their Internet Identity principal",
+      "files": [
+        "frontend/src/hooks/useEncryption.ts"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-internet-identity-authentication-flow-requiring-users-to-authenticate-before-accessing-the-document-vault",
+      "featureTitle": "Add Internet Identity authentication flow requiring users to authenticate before accessing the document vault",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AuthGuard.tsx"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-a-cohesive-visual-theme-with-a-secure-professional-aesthetic-using-dark-tones-minimalist-layout-and-subtle-security-focused-design-elements-that-reinforce-trust-and-data-protection",
+      "featureTitle": "Design a cohesive visual theme with a secure, professional aesthetic using dark tones, minimalist layout, and subtle security-focused design elements that reinforce trust and data protection",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

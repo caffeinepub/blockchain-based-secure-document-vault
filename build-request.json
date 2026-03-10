@@ -1,0 +1,157 @@
+{
+  "kind": "build_request",
+  "title": "Create blockchain-based secure document vault",
+  "projectName": "SecureVault",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a backend document storage system with stable memory persistence that stores document metadata (id, name, owner principal, upload timestamp, file size, content hash) and encrypted document content as Blob data",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Documents are stored with unique IDs in stable storage",
+        "Each document includes owner principal, timestamp, and content hash",
+        "Document content is stored as encrypted Blob data",
+        "System survives canister upgrades without data loss"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement backend methods for uploading documents (addDocument), retrieving document list for authenticated user (listMyDocuments), downloading specific documents by ID (getDocument), and deleting user's own documents (deleteDocument)",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Upload accepts document name and encrypted content, returns document ID",
+        "List returns only documents owned by the caller",
+        "Download verifies caller owns the document before returning content",
+        "Delete verifies ownership before removing document"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement access control ensuring users can only access, download, and delete their own documents based on Internet Identity principal",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All document operations verify caller principal matches document owner",
+        "Unauthorized access attempts are rejected with appropriate error messages",
+        "Anonymous principals cannot perform any document operations"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Create a document upload interface with file picker, drag-and-drop support, client-side encryption before upload, and upload progress indicator",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can select files via button click or drag-and-drop",
+        "Files are encrypted on the client before transmission",
+        "Upload progress is displayed during file transfer",
+        "Success confirmation is shown after successful upload"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Build a document vault dashboard displaying a list of user's documents with name, upload date, file size, and action buttons for download and delete",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard shows all documents owned by authenticated user",
+        "Each document displays name, formatted upload date, and human-readable file size",
+        "Download button triggers client-side decryption and file download",
+        "Delete button removes document after user confirmation",
+        "Empty state is shown when user has no documents"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement client-side file encryption and decryption using Web Crypto API with a user-specific encryption key derived from their Internet Identity principal",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Encryption key is consistently derived from user's principal",
+        "Files are encrypted before upload to backend",
+        "Downloaded files are automatically decrypted for the user",
+        "Encryption/decryption operations handle errors gracefully"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add Internet Identity authentication flow requiring users to authenticate before accessing the document vault",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated users see a login prompt",
+        "Login button initiates Internet Identity authentication",
+        "After successful authentication, user can access vault features",
+        "User's principal is available for backend authorization"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Design a cohesive visual theme with a secure, professional aesthetic using dark tones, minimalist layout, and subtle security-focused design elements that reinforce trust and data protection",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Color scheme uses dark, professional tones that avoid blue and purple",
+        "Typography is clean and readable with appropriate hierarchy",
+        "Layout emphasizes security and organization",
+        "Visual elements consistently reinforce the vault security concept"
+      ]
+    }
+  ],
+  "constraints": [
+    "All document operations must verify owner principal matches caller principal",
+    "Documents must persist across canister upgrades using stable storage",
+    "File encryption/decryption must occur entirely on the client side",
+    "Only Internet Identity authentication is supported"
+  ],
+  "nonGoals": [
+    "Document sharing between users",
+    "Version history or document revisions",
+    "Document preview or inline viewing",
+    "Third-party authentication providers",
+    "Real-time collaboration features",
+    "External cloud storage integration"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Security-themed vault logo icon with lock and shield elements in monochrome (vault-logo.dim_256x256.png)",
+      "Abstract geometric background pattern suggesting encrypted data in dark tones (encrypted-bg.dim_1920x1080.png)"
+    ],
+    "edits": []
+  }
+}

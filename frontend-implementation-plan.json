@@ -1,0 +1,133 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "SecureVault - Blockchain Document Vault Frontend",
+  "requirements": [
+    {
+      "id": "REQ-4",
+      "summary": "Create document upload interface with file picker, drag-and-drop, client-side encryption, and progress indicator",
+      "acceptanceCriteria": [
+        "Users can select files via button click or drag-and-drop",
+        "Files are encrypted on the client before transmission",
+        "Upload progress is displayed during file transfer",
+        "Success confirmation is shown after successful upload"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/DocumentUpload.tsx",
+          "operation": "create",
+          "description": "Create a document upload component with file input, drag-and-drop zone, and upload progress display. Use the blob-storage component's ExternalBlob.fromBytes() and withUploadProgress() methods to handle file uploads with progress tracking. Files must be encrypted using Web Crypto API before converting to ExternalBlob. Verify the component's usage instructions before implementing. Display success message after upload completes and refresh the document list."
+        },
+        {
+          "path": "frontend/src/hooks/useEncryption.ts",
+          "operation": "create",
+          "description": "Create a custom hook that provides encryption and decryption functions using Web Crypto API. Derive encryption key from user's Internet Identity principal using PBKDF2. Export encryptFile and decryptFile functions that handle ArrayBuffer conversion and AES-GCM encryption/decryption with proper error handling."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build document vault dashboard displaying user's documents with metadata and action buttons",
+      "acceptanceCriteria": [
+        "Dashboard shows all documents owned by authenticated user",
+        "Each document displays name, formatted upload date, and human-readable file size",
+        "Download button triggers client-side decryption and file download",
+        "Delete button removes document after user confirmation",
+        "Empty state is shown when user has no documents"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/DocumentList.tsx",
+          "operation": "create",
+          "description": "Create a document list component that fetches and displays documents using backend.getMyDocumentIds(). For each document, display name, formatted upload timestamp, and human-readable file size. Include download and delete action buttons. Use the blob-storage component's ExternalBlob.getDirectURL() for retrieving document content during download. Verify the component's usage instructions before implementing. Show empty state when no documents exist. Handle loading and error states appropriately."
+        },
+        {
+          "path": "frontend/src/components/DocumentItem.tsx",
+          "operation": "create",
+          "description": "Create a document item component that renders individual document metadata (name, date, size) and action buttons. Download button retrieves document content using backend.getDocument(), decrypts using useEncryption hook, and triggers browser download. Delete button shows confirmation dialog before calling backend.deleteDocument(). Format upload date and file size for human readability."
+        },
+        {
+          "path": "frontend/src/pages/VaultDashboard.tsx",
+          "operation": "create",
+          "description": "Create the main vault dashboard page that combines DocumentUpload and DocumentList components. Manage document list state and provide refresh callback to DocumentUpload for updating list after successful uploads. Include authentication check to ensure user is logged in before rendering vault content."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement client-side file encryption and decryption using Web Crypto API with principal-derived key",
+      "acceptanceCriteria": [
+        "Encryption key is consistently derived from user's principal",
+        "Files are encrypted before upload to backend",
+        "Downloaded files are automatically decrypted for the user",
+        "Encryption/decryption operations handle errors gracefully"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useEncryption.ts",
+          "operation": "modify",
+          "description": "Enhance the encryption hook to derive a consistent AES-GCM encryption key from the user's Internet Identity principal using PBKDF2 with a fixed salt. Implement encryptFile function that accepts File or Blob, encrypts content with derived key, and returns encrypted Uint8Array. Implement decryptFile function that accepts encrypted Uint8Array, decrypts with derived key, and returns original content. Include proper error handling for encryption/decryption failures and invalid key derivation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add Internet Identity authentication flow for vault access",
+      "acceptanceCriteria": [
+        "Unauthenticated users see a login prompt",
+        "Login button initiates Internet Identity authentication",
+        "After successful authentication, user can access vault features",
+        "User's principal is available for backend authorization"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AuthGuard.tsx",
+          "operation": "create",
+          "description": "Create an authentication guard component that checks if user is authenticated. If not authenticated, display a login prompt with Internet Identity login button. If authenticated, render children (protected content). Use the authentication context to access login state and trigger Internet Identity authentication flow."
+        },
+        {
+          "path": "frontend/src/contexts/AuthContext.tsx",
+          "operation": "create",
+          "description": "Create authentication context that manages Internet Identity authentication state. Provide login and logout functions that interact with Internet Identity. Store authenticated principal and expose it to consuming components. Include loading state during authentication process."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the application with AuthContext provider. Update routing to protect VaultDashboard page with AuthGuard component. Ensure authenticated principal is available for backend calls and encryption key derivation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Design secure, professional visual theme with dark tones and minimalist security-focused layout",
+      "acceptanceCriteria": [
+        "Color scheme uses dark, professional tones that avoid blue and purple",
+        "Typography is clean and readable with appropriate hierarchy",
+        "Layout emphasizes security and organization",
+        "Visual elements consistently reinforce the vault security concept"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global styles with a dark, professional color scheme using charcoal, slate gray, and warm accent tones (avoiding blue and purple). Define CSS custom properties for consistent theming. Ensure typography uses clean, readable fonts with clear hierarchy. Apply security-focused design elements like subtle borders and shadows that reinforce trust and protection."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Configure Tailwind theme with custom dark color palette using neutral grays, charcoal blacks, and warm accent colors (amber, orange, or green tones). Define custom spacing and typography scales that support minimalist, organized layouts. Extend theme with security-themed design tokens for borders, shadows, and surfaces."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create a layout component that provides consistent structure across the application. Include header with vault branding using the generated vault-logo.dim_256x256.png from frontend/public/assets/generated/vault-logo.dim_256x256.png. Apply the generated encrypted-bg.dim_1920x1080.png from frontend/public/assets/generated/encrypted-bg.dim_1920x1080.png as a subtle background pattern. Use dark, professional styling that emphasizes security and organization."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap application content with Layout component to apply consistent branding and visual theme across all pages. Ensure the layout includes the security-themed vault logo and encrypted background pattern from generated assets."
+        }
+      ]
+    }
+  ]
+}

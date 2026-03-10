@@ -1,0 +1,22 @@
+{
+  "backend/main.mo": "Main Motoko actor that manages documents with blob storage, providing functions to add, retrieve, list, and delete documents with owner-based access control.",
+  "feature_evidence.json": "Feature evidence report mapping implemented features (upload interface, vault dashboard, encryption, authentication, visual theme) to their source files, components, and test IDs.",
+  "frontend-file-summaries.txt": "JSON-formatted summaries of all frontend files describing their purpose and key functionality in the document vault application.",
+  "frontend/index.css": "Tailwind CSS configuration with custom OKLCH color variables defining a dark theme with charcoal backgrounds and warm amber accents for both light and dark modes.",
+  "frontend/index.html": "HTML entry point for the React application with root div and module script reference to main.tsx.",
+  "frontend/src/App.tsx": "Root React component that wraps the application with ThemeProvider, renders VaultDashboard inside Layout, and includes Toaster for notifications.",
+  "frontend/src/components/AuthGuard.tsx": "Authentication guard component that displays a login screen with Internet Identity button for unauthenticated users and renders children for authenticated users.",
+  "frontend/src/components/DocumentItem.tsx": "Component rendering individual document with metadata, download button (with decryption), and delete button with confirmation dialog.",
+  "frontend/src/components/DocumentList.tsx": "Component that fetches and displays a list of user documents with loading, error, and empty states, rendering DocumentItem for each document.",
+  "frontend/src/components/DocumentUpload.tsx": "React component for uploading documents with drag-and-drop support, encrypting files using the useEncryption hook, and uploading them to the backend with progress tracking.",
+  "frontend/src/components/Layout.tsx": "Main layout component providing header with logo and user identity display, background pattern, and footer with branding and attribution.",
+  "frontend/src/hooks/useActor.ts": "React Query hook that creates and manages the backend actor instance based on Internet Identity authentication state, invalidating dependent queries when the actor changes.",
+  "frontend/src/hooks/useEncryption.ts": "Hook providing client-side file encryption/decryption using AES-GCM with keys derived from the user's Internet Identity principal via PBKDF2.",
+  "frontend/src/hooks/useInternetIdentity.ts": "React context and hook for managing Internet Identity authentication, including login/logout, identity persistence, and status tracking throughout the authentication lifecycle.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for document operations: fetching user documents, adding new documents, and deleting documents with automatic cache invalidation.",
+  "frontend/src/index.css": "Tailwind CSS configuration with custom CSS variables defining light and dark theme colors, including vault-specific amber/orange accent colors.",
+  "frontend/src/main.tsx": "Application entry point that sets up React Query client and Internet Identity provider, then renders the root App component.",
+  "frontend/src/pages/VaultDashboard.tsx": "Main dashboard page displaying document upload and list components with authentication guard and refresh trigger for updating the document list after uploads.",
+  "frontend/tailwind.config.js": "Tailwind CSS configuration file defining a dark-mode-enabled design system with custom color tokens using OKLCH color space, extended typography, container queries, animations for accordions, and custom font families (Inter and JetBrains Mono).",
+  "project_state.json": "Project state file for a Blockchain-Based Secure Document Vault application tracking completed features (upload interface, dashboard, client-side encryption, Internet Identity auth, visual theme) and pending backend features (document storage, CRUD operations, access control)."
+}

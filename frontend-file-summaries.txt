@@ -1,0 +1,14 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the app with ThemeProvider and renders the VaultDashboard within the Layout component, includes Toaster for notifications.",
+  "frontend/src/components/Layout.tsx": "Layout component providing consistent header with vault logo and branding, user authentication status, logout button, encrypted background pattern, and footer with attribution.",
+  "frontend/src/pages/VaultDashboard.tsx": "Main dashboard page that combines DocumentUpload and DocumentList components with refresh trigger state management for authenticated users.",
+  "frontend/src/components/AuthGuard.tsx": "Authentication guard component that displays login prompt with Internet Identity button for unauthenticated users and renders protected content for authenticated users.",
+  "frontend/src/components/DocumentUpload.tsx": "Document upload component with custom drag-and-drop implementation, file encryption before upload, progress tracking, and integration with blob storage using properly typed encrypted data.",
+  "frontend/src/components/DocumentList.tsx": "Document list component that fetches and displays user's encrypted documents with loading, error, and empty states.",
+  "frontend/src/components/DocumentItem.tsx": "Individual document item component displaying document metadata with download (decrypt and save using properly typed decrypted data) and delete (with confirmation) actions.",
+  "frontend/src/hooks/useEncryption.ts": "Custom hook providing client-side file encryption and decryption using Web Crypto API with AES-GCM and PBKDF2 key derivation from user's principal, returning properly typed Uint8Array<ArrayBuffer>.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend operations including fetching documents, adding documents, and deleting documents with automatic cache invalidation.",
+  "frontend/src/index.css": "Global styles with OKLCH color system featuring dark charcoal background with warm amber accent colors, avoiding blue and purple tones for security-focused aesthetic.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom dark color palette using charcoal, slate, and warm amber accent colors, custom fonts, and vault-specific design tokens.",
+  "frontend/package.json": "Package configuration without react-dropzone dependency, using only built-in React functionality for file handling."
+}
